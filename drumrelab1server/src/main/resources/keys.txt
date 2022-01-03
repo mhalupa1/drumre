@@ -1,0 +1,9 @@
+twitter api key : NsEGUMrlRhFAPtsO9YE9KRwxn
+twitter api key secret: DvhGJqCNVMalfH5X2d7vH0wsyKTkEqQIF8dGdmitGXTbPmbI37
+
+moviedb api key : ceb862e981581c4562d9983396e38ef6
+
+trakt api key : 348c786d476c1d93105567ad6087d3f0c129b70ebb5fc5caa0be49817e5099e8
+trakt api secret : d1a8dc2e278a5ff82a5f9ba12852f41ab78120d41d865262a0f0e181099a1f10
+
+omdb key : 55101b5

@@ -1,0 +1,39 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'hr.fer.drumre'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core
+    implementation group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.1'
+    implementation("com.uwetrottmann.trakt5:trakt-java:6.10.0")
+    implementation group: 'com.github.holgerbrandl', name: 'themoviedbapi', version:'1.12'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.6.1'
+
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
