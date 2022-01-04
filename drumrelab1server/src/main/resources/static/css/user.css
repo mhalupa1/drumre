@@ -123,7 +123,6 @@ body{
 	display:none;
 	position:fixed;
 	z-index:1;
-	padding-top:50px;
 	left:0;
 	top:0;
 	width:100%;
@@ -138,9 +137,9 @@ body{
 	color:#e2c107;
 	font-family:Arial, Helvetica, sans-serif;
 	margin:auto;
-	padding:20px;
+	padding:10px;
 	border:1px solid #888;
-	width:80%;
+	width:95%;
 }
 
 .close {
@@ -188,7 +187,6 @@ body{
 }
 
 #trailer {
-	margin-top:10px;
 	border:2px solid #e2c107;
 	height:350px;
 	width:600px;
