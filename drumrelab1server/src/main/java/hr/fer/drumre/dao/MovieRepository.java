@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MovieRepository extends MongoRepository<DrMovie,String> {
+public interface MovieRepository extends MongoRepository<DrMovie,Integer> {
 
     @Query(value = "{'title': {'$regex' : '?0', '$options':'i'}}")
     public List<DrMovie> getMoviesByTitle(String title);

@@ -20,7 +20,7 @@ public class MovieService {
     }
 
     public DrMovie getMovieById(int id){
-        Optional<DrMovie> movie = repo.findById(String.valueOf(id));
+        Optional<DrMovie> movie = repo.findById(id);
         return movie.orElse(null);
     }
 
