@@ -27,7 +27,7 @@ public class UserService {
     public String login() throws TwitterException {
         Twitter twitter = getTwitter();
 
-        requestToken = twitter.getOAuthRequestToken("http://127.0.0.1:4200/home");
+        requestToken = twitter.getOAuthRequestToken("http://127.0.0.1:8080/user.html");
         //now get the authorization URL from the token
         twitterUrl = requestToken.getAuthorizationURL();
 
@@ -55,7 +55,7 @@ public class UserService {
 
     public AccessToken getTwitterCallback(OAuthData data) throws TwitterException {
         Twitter twitter = getTwitter();
-        AccessToken token = twitter.getOAuthAccessToken(requestToken, data.getOAuthVerifier());
+        AccessToken token = twitter.getOAuthAccessToken(requestToken, data.getoAuthVerifier());
         repo.save(new User(String.valueOf(token.getUserId()),token.getScreenName()));
         return token;
     }

@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/twitterCallback", method = RequestMethod.POST)
-    public AccessToken getTwitterCallback(@RequestBody OAuthData data) throws TwitterException {
+    public AccessToken getTwitterCallback(OAuthData data) throws TwitterException {
         return service.getTwitterCallback(data);
     }
 }

@@ -1,151 +1,43 @@
-function getMovies(){
+function getUrlParameters(){
+	var url = window.location.search.substring(1);
+	var variables = url.split('&');
 
-	var container = $("#allMovies");
+	var oauth_token;
+	var oauth_verifier;
 
-	$.ajax({
-		type:'GET',
-		url:'/getMovies',
-		contentType:'application/json',
-		success:function(data){
-			$.each(data, function(i, r){
-				container.append(
-					'<div>' +
-						'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster + '"/>' +
-						'<button id="' + r.id + '" onClick="getMovie(this.id)">' + r.title + '</button>' +
-					'</div>'
-				);
-			});
+	for (var i = 0; i < variables.length; i++){
+		var parameter = variables[i].split('=');
+		if(i == 0){
+			oauth_token = parameter[1];
+		} else if(i == 1){
+			oauth_verifier = parameter[1];
 		}
+	}
+
+	$.post('/twitterCallback', { oAuthToken: oauth_token, oAuthVerifier : oauth_verifier}, 
+	function(returnedData){
+		console.log(returnedData);
+		document.cookie = "screenName=" + returnedData.screenName + ";path=/";
+		document.cookie = "token=" + returnedData.token + ";path=/";
+		document.cookie = "tokenSecret=" + returnedData.tokenSecret + ";path=/";
+		document.cookie = "userId=" + returnedData.userId + ";path=/";
 	});
+	var timer = setTimeout(function() {
+		window.location='http://127.0.0.1:8080/movie.html'
+	}, 1000);
 }
 
-function getMovie(id){
-	$("#myModal").css("display", "block");
-
-	var sendData = {
-		id:id
-	};
-
-	$("#table").empty();
-	var table = $("#table");
-
-	$.ajax({
-		type:'GET',
-		url:'/getMovieById',
-		contentType:'application/json',
-		data:sendData,
-		success:function(data){
-			$("#poster").attr("src", "https://image.tmdb.org/t/p/original" + data.poster);
-			var link = data.trailer;
-			link = link.replace("watch?v=", "embed/");
-			table.append(
-				'<tr>' +
-					'<th>Title</th>' +
-					'<td>' + data.title + '</td>' +
-				'</tr>' +
-				'<tr>' +
-					'<th>Release</th>' +
-					'<td>' + data.releaseDate + '</td>' +
-				'</tr>' +
-				'<tr>' +
-					'<th>Actors</th>' +
-					'<td>' + data.actors + '</td>' +
-				'</tr>' +
-				'<tr>' +
-					'<th>Directors</th>' +
-					'<td>' + data.directors + '</td>' +
-				'</tr>' +
-				'<tr>' +
-					'<th>Writers</th>' +
-					'<td>' + data.writers + '</td>' +
-				'</tr>' +
-				'<tr>' +
-					'<th>Genres</th>' +
-					'<td>' + data.genres + '</td>' +
-				'</tr>' +
-				'<tr>' +
-					'<th>Synopsis</th>' +
-					'<td>' + data.synopsis + '</td>' +
-				'</tr>'
-			);
-			$("#trailer").attr("src", link);
-			$("#imdb").attr("href", "https://www.imdb.com/title/" + data.imdbId);
-			$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + data.movieDbId);
-			$("#trakt").attr("href", "https://trakt.tv/movies/" + data.traktId);
-			$("#homepage").attr("href", data.homepage);
-			$("#imdbScore").text(data.imdb + "/10");
-			$("#metascore").text(data.metascore + "/100");
+function getCookie(cname) {
+	let name = cname + "=";
+	let ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
 		}
-	});
-}
-
-function closeModal(){
-	$("#myModal").css("display", "none");
-}
-
-function searchMovie(){
-	$("#myModal").css("display", "block");
-
-	var sendData = {
-		title: $("#search").val()
-	};
-
-	$("#search").val('');
-
-	$("#table").empty();
-	var table = $("#table");
-
-	$.ajax({
-		type:'GET',
-		url:'/getMoviesByTitle',
-		contentType:'application/json',
-		data:sendData,
-		success:function(data){
-			$.each(data, function(i, r){
-				$("#poster").attr("src", "https://image.tmdb.org/t/p/original" + r.poster);
-				var link = r.trailer;
-				link = link.replace("watch?v=", "embed/");
-				table.append(
-					'<tr>' +
-						'<th>Title</th>' +
-						'<td>' + r.title + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Release</th>' +
-						'<td>' + r.releaseDate + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Actors</th>' +
-						'<td>' + r.actors + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Directors</th>' +
-						'<td>' + r.directors + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Writers</th>' +
-						'<td>' + r.writers + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Genres</th>' +
-						'<td>' + r.genres + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Synopsis</th>' +
-						'<td>' + r.synopsis + '</td>' +
-					'</tr>'
-				);
-				$("#trailer").attr("src", link);
-				$("#imdb").attr("href", "https://www.imdb.com/title/" + r.imdbId);
-				$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + r.movieDbId);
-				$("#trakt").attr("href", "https://trakt.tv/movies/" + r.traktId);
-				$("#homepage").attr("href", r.homepage);
-				$("#imdbScore").text(r.imdb + "/10");
-				$("#metascore").text(r.metascore + "/100");
-				if(i == 0){
-					return false;
-				}
-			});
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
 		}
-	});
+	}
+	return "";
 }

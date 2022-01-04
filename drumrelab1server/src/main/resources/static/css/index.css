@@ -20,7 +20,7 @@ body{
 	width:100%;
 	background-color:#e2c107;
 	font-family:Arial, Helvetica, sans-serif;
-	padding:20px 0px;
+	padding:10px 0px;
 	text-align:right;
 }
 
@@ -31,7 +31,7 @@ body{
 	border-radius:3px;
 	color:white;
 	padding:10px 50px;
-	margin:50px;
+	margin:10px;
 	text-align:center;
 	text-decoration:none;
 	font-size:13px;
