@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Početna</title>
+		<link rel="stylesheet" type="text/css" href="css/user.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="js/user.js"></script>
+	</head>
+	<body onLoad="getMovies()">
+
+		<div id="header">
+			<h1>Movies</h1>
+		</div>
+
+		<div id="navbar">
+			<input id="search" type="text" placeholder="Search.." name="search">
+			<button onClick="searchMovie()"><i class="fa fa-search"></i></button>
+			<p id="user">User</p>
+			<form action="/logout" method="post"><input id="logout" class="nav-button" type="submit" value="Logout"/></form>
+		</div>
+
+		<div id="allMovies"></div>
+
+		<div id="myModal" class="modal">
+			<div id="modal-content">
+				<button class="close" onClick="closeModal()">&times;</button>
+				<div id="movie-info">
+					<img id="poster" alt="poster">
+					<table id="table"></table>
+				</div>
+				<div id="movie-info2">
+					<div>
+						<iframe id="trailer" src=""></iframe>
+					</div>
+					<div id="links">
+						<a id="imdb" href="">IMDb</a>
+						<a id="moviedb" href="">TMDB</a>
+						<a id="trakt" href="">Trakt TV</a>
+						<a id="homepage" href="">Homepage</a>
+					</div>
+					<div class="score">
+						<h1 id="imdbScore"></h1>
+						<h2>imdb</h2>
+					</div>
+					<div class=score>
+						<h1 id="metascore"></h1>
+						<h2>Metascore</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

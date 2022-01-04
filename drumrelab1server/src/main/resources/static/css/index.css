@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+body{
+	margin:0px;
+	background-image:url('/background/the-greats.jpg');
+}
+
+#header{
+	text-align:center;
+	font-family:'Brush Script MT', cursive;
+	font-size:30px;
+	padding:30px;
+	background-color:black;
+	color:#e2c107;
+}
+
+#navbar{
+	border-top:2px solid #3b3b3b;
+	border-bottom:10px solid #3b3b3b;
+	width:100%;
+	background-color:#e2c107;
+	font-family:Arial, Helvetica, sans-serif;
+	padding:20px 0px;
+	text-align:right;
+}
+
+#login {
+	font-family:Arial, Helvetica, sans-serif;
+	background-color:#1d9bf0;
+	border:2px solid #3b3b3b;
+	border-radius:3px;
+	color:white;
+	padding:10px 50px;
+	margin:50px;
+	text-align:center;
+	text-decoration:none;
+	font-size:13px;
+	font-weight:bold;
+}
+
+#login:hover {
+	background-color:#0c6daf;
+}
