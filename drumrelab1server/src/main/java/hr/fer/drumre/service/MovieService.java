@@ -27,4 +27,12 @@ public class MovieService {
     public List<DrMovie> getMoviesByTitle(String title){
         return repo.getMoviesByTitle(title);
     }
+
+    public List<DrMovie> getMoviesByGenre(String genre){
+        return repo.getMoviesByGenre(genre);
+    }
+
+    public List<DrMovie> getMoviesByActor(String actor){
+        return repo.getMoviesByActor(actor);
+    }
 }

@@ -66,6 +66,14 @@ function getMovie(id){
 				'<tr>' +
 					'<th>Synopsis</th>' +
 					'<td>' + data.synopsis + '</td>' +
+				'</tr>' +
+				'<tr>' +
+					'<th>imdb</th>' +
+					'<td>' + data.imdb + '/10</td>' +
+				'</tr>' +
+				'<tr>' +
+					'<th>Metascore</th>' +
+					'<td>' + data.metascore + '/100</td>' +
 				'</tr>'
 			);
 			$("#trailer").attr("src", link);
@@ -73,8 +81,6 @@ function getMovie(id){
 			$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + data.movieDbId);
 			$("#trakt").attr("href", "https://trakt.tv/movies/" + data.traktId);
 			$("#homepage").attr("href", data.homepage);
-			$("#imdbScore").text(data.imdb + "/10");
-			$("#metascore").text(data.metascore + "/100");
 		}
 	});
 }
@@ -133,6 +139,14 @@ function searchMovie(){
 					'<tr>' +
 						'<th>Synopsis</th>' +
 						'<td>' + r.synopsis + '</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<th>imdb</th>' +
+						'<td>' + r.imdb + '/10</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<th>Metascore</th>' +
+						'<td>' + r.metascore + '/100</td>' +
 					'</tr>'
 				);
 				$("#trailer").attr("src", link);
@@ -140,8 +154,6 @@ function searchMovie(){
 				$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + r.movieDbId);
 				$("#trakt").attr("href", "https://trakt.tv/movies/" + r.traktId);
 				$("#homepage").attr("href", r.homepage);
-				$("#imdbScore").text(r.imdb + "/10");
-				$("#metascore").text(r.metascore + "/100");
 				if(i == 0){
 					return false;
 				}

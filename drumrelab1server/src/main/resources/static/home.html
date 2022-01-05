@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Početna</title>
-		<link rel="stylesheet" type="text/css" href="css/movie.css">
+		<title>Home</title>
+		<link rel="stylesheet" type="text/css" href="css/home.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="js/movie.js"></script>
+		<script src="js/home.js"></script>
 	</head>
 	<body onLoad="getMovies(); getCookie()">
 
@@ -15,8 +15,9 @@
 		</div>
 
 		<div id="navbar">
-			<input id="search" type="text" placeholder="Search.." name="search">
-			<button onClick="searchMovie()"><i class="fa fa-search"></i></button>
+			<input id="search" type="text" placeholder="Search movies..." name="search">
+			<button id="searchBtn" onClick="searchMovie()"><i class="fa fa-search"></i></button>
+			<button class="nav-button" onClick="location.href='/explore.html'">Explore</button>
 			<p id="user"></p>
 			<button id="logout" class="nav-button" onClick="logout()">Logout</button>
 		</div>
@@ -40,16 +41,18 @@
 						<a id="trakt" href="">Trakt TV</a>
 						<a id="homepage" href="">Homepage</a>
 					</div>
-					<div class="score">
-						<h1 id="imdbScore"></h1>
-						<h2>imdb</h2>
-					</div>
-					<div class=score>
-						<h1 id="metascore"></h1>
-						<h2>Metascore</h2>
-					</div>
 				</div>
 			</div>
 		</div>
+
+		<script>
+			var input = document.getElementById("search");
+			input.addEventListener("keyup", function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					document.getElementById("searchBtn").click();
+				}
+			});
+		</script>
 	</body>
 </html>

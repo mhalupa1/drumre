@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Explore</title>
+		<link rel="stylesheet" type="text/css" href="css/explore.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="js/explore.js"></script>
+	</head>
+	<body onLoad="getCookie()">
+		<div id="header">
+			<h1>Movies</h1>
+		</div>
+
+		<div id="navbar">
+			<button class="nav-button" onClick="location.href='/home.html'">Home</button>
+			<p id="user"></p>
+			<button id="logout" class="nav-button" onClick="logout()">Logout</button>
+		</div>
+		<div id="navigation">
+			<button onClick="recommend()">Recommended</button>
+			<button onClick="rank()">Ranking</button>
+			<button onClick="genres()">Genres</button>
+			<button onClick="actors()">Actors</button>
+		</div>
+
+		<div id="recommended">
+		
+		</div>
+
+		<div id="ranking">
+		
+		</div>
+
+		<div id="byGenre">
+			<select name="genre" id="genre">
+				<option>adventure</option>
+				<option>science-fiction</option>
+				<option>action</option>
+				<option>comedy</option>
+				<option>superhero</option>
+				<option>fantasy</option>
+				<option>drama</option>
+				<option>mystery</option>
+				<option>animation</option>
+				<option>musical</option>
+				<option>family</option>
+				<option>crime</option>
+				<option>thriller</option>
+				<option>romance</option>
+			</select>
+			<button onClick="searchByGenre()"><i class="fa fa-search"></i></button>
+		</div>
+		<div id="genreResult" class="result"></div>
+
+		<div id="byActor">
+			<input id="actor" type="text" placeholder="Search by actor...">
+			<button id="actorBtn" onClick="searchByActor()"><i class="fa fa-search"></i></button>
+		</div>
+		<div id="actorResult" class="result"></div>
+
+		<div id="myModal" class="modal">
+			<div id="modal-content">
+				<button class="close" onClick="closeModal()">&times;</button>
+				<div id="movie-info">
+					<img id="poster" alt="poster">
+					<table id="table"></table>
+				</div>
+				<div id="movie-info2">
+					<div>
+						<iframe id="trailer" src=""></iframe>
+					</div>
+					<div id="links">
+						<a id="imdb" href="">IMDb</a>
+						<a id="moviedb" href="">TMDB</a>
+						<a id="trakt" href="">Trakt TV</a>
+						<a id="homepage" href="">Homepage</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var input = document.getElementById("actor");
+		input.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("actorBtn").click();
+			}
+		});
+	</script>
+</html>

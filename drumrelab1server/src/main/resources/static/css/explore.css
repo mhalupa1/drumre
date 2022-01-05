@@ -1,0 +1,341 @@
+@charset "UTF-8";
+
+body{
+	margin:0px;
+	background-color:white;
+	position:relative;
+	min-height:100vh;
+}
+
+#header{
+	text-align:center;
+	font-family:'Brush Script MT', cursive;
+	font-size:30px;
+	padding:30px;
+	background-color:black;
+	color:#e2c107;
+}
+
+#navbar{
+	font-family: Arial, Helvetica, sans-serif;
+	border-top:2px solid #3b3b3b;
+	border-bottom:2px solid #3b3b3b;
+	width:100%;
+	padding:5px 0px;
+	background-color:#e2c107;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+}
+
+.nav-button{
+	padding:10px;
+	margin:10px;
+	min-width:100px;
+	font-weight:bold;
+	border:2px solid #3b3b3b;
+	border-radius:3px;
+	background-color:black;
+	color:white;
+}
+
+.nav-button:hover {
+	background-color:#3b3b3b;
+}
+
+#navbar button {
+	border:2px solid #3b3b3b;
+	border-left:1px solid black;
+	padding:10px;
+	width:50px;
+	background-color:black;
+	color:white;
+	font-weight:bold;
+}
+
+#navbar button:hover {
+	background-color:#3b3b3b;
+}
+
+#user{
+	margin-left:auto;
+	color:black;
+	font-weight:bold;
+}
+
+#navigation {
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
+	border:1px solid #e2c107;
+	background-color:black;
+	padding:5px;
+}
+
+#navigation button {
+	margin-left:1px;
+	padding:10px;
+	width:120px;
+	border:2px solid #e2c107;
+	border-radius:3px;
+	color:white;
+	background-color:black;
+	font-weight:bold;
+}
+
+#navigation button:hover {
+	background-color:#3b3b3b;
+}
+
+#byGenre {
+	display:none;
+	margin:1px;
+	text-align:center;
+	background-color:#e4e4e4;
+}
+
+#genre {
+	padding:10px;
+	border:2px solid black;
+	width:193px;
+}
+
+#byGenre button {
+	border:2px solid #3b3b3b;
+	padding:10px;
+	width:50px;
+	background-color:black;
+	color:white;
+	font-weight:bold;
+}
+
+#byGenre button:hover {
+	background-color:#3b3b3b;
+}
+
+.result {
+	margin:10px 10px 0px;
+	padding:10px;
+	display:grid;
+	grid-template-columns:auto auto auto auto auto;
+	align-items:center;
+	justify-content:center;
+	overflow:auto;
+}
+
+.result div {
+	width:252px;
+	height:420px;
+	padding-bottom:10px;
+	margin-bottom:10px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	border:1px solid #c7c7c7;
+	text-align:center;
+	background-color:black;
+}
+
+.result button {
+	padding:10px 10px 7px;
+	border:none;
+	color:#e2c107;
+	background-color:black;
+	font-weight:bold;
+	font-size:14px;
+	width:252px;
+	margin-top:10px;
+}
+
+.result button:hover {
+	color:yellow;
+	background-color:#1b1b1b;
+}
+
+.posters {
+	width:250px;
+	height:350px;
+	border:1px solid black;
+}
+
+#byActor {
+	display:none;
+	margin:1px;
+	text-align:center;
+	background-color:#e4e4e4;
+}
+
+#actor {
+	padding:10px;
+	border:2px solid black;
+}
+
+#byActor button {
+	border:2px solid #3b3b3b;
+	padding:10px;
+	width:50px;
+	background-color:black;
+	color:white;
+	font-weight:bold;
+}
+
+#byActor button:hover {
+	background-color:#3b3b3b;
+}
+
+.modal {
+	display:none;
+	position:fixed;
+	z-index:1;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	overflow:auto;
+	background-color:rgb(0,0,0);
+	background-color:rgba(0,0,0,0.4);
+}
+
+#modal-content {
+	background-color:#000000;
+	color:#e2c107;
+	font-family:Arial, Helvetica, sans-serif;
+	margin:auto;
+	padding:10px;
+	border:1px solid #888;
+	width:95%;
+}
+
+.close {
+	color:#aaaaaa;
+	float:right;
+	font-size:28px;
+	font-weight:bold;
+}
+
+.close:hover, .close:focus {
+	color:#000;
+	text-decoration:none;
+	cursor:pointer;
+}
+
+#movie-info {
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:left;
+	margin-bottom:1px;
+}
+
+#movie-info2 {
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:left;
+}
+
+#table {
+	border:1px solid black;
+	margin:10px;
+	font-size:15px;
+}
+
+#table th, td {
+	border-bottom:1px solid #3b3b3b;
+	padding:5px 10px;
+}
+
+.modal img {
+	border:2px solid #e2c107;
+	width:200px;
+	height:300px;
+}
+
+#trailer {
+	border:2px solid #e2c107;
+	height:350px;
+	width:600px;
+}
+
+#links {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:left;
+}
+
+#movie-info2 a {
+	margin:10px 40px;
+}
+
+#imdb {
+	border:1px solid yellow;
+	border-radius:3px;
+	padding:20px;
+	width:100px;
+	text-decoration:none;
+	font-weight:bold;
+	text-align:center;
+	font-size:20px;
+	vertical-align:middle;
+	color:black;
+	background-color:#e2c107;
+}
+
+#imdb:hover {
+	background-color:#b19805;
+}
+
+#moviedb {
+	border:1px solid #02b3e3;
+	border-radius:3px;
+	padding:20px;
+	width:100px;
+	text-decoration:none;
+	font-weight:bold;
+	text-align:center;
+	font-size:20px;
+	vertical-align:middle;
+	color:#02b3e3;
+	background-color:#032541;
+}
+
+#moviedb:hover {
+	background-color:#06518e;
+}
+
+#trakt {
+	border:1px solid white;
+	border-radius:3px;
+	padding:20px;
+	width:100px;
+	text-decoration:none;
+	font-weight:bold;
+	text-align:center;
+	font-size:20px;
+	vertical-align:middle;
+	color:white;
+	background-color:#ed1c24;
+}
+
+#trakt:hover {
+	background-color:#bb0f17;
+}
+
+#homepage {
+	border:1px solid white;
+	border-radius:3px;
+	padding:20px;
+	width:100px;
+	text-decoration:none;
+	font-weight:bold;
+	text-align:center;
+	font-size:20px;
+	vertical-align:middle;
+	color:white;
+	background-color:#005500;
+}
+
+#homepage:hover {
+	background-color:#008400;
+}

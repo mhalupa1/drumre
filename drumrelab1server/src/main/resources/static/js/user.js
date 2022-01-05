@@ -23,7 +23,7 @@ function getUrlParameters(){
 		document.cookie = "userId=" + returnedData.userId + ";path=/";
 	});
 	var timer = setTimeout(function() {
-		window.location='http://127.0.0.1:8080/movie.html'
+		window.location='http://127.0.0.1:8080/home.html'
 	}, 1000);
 }
 

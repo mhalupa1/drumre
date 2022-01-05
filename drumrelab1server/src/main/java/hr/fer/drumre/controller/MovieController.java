@@ -29,4 +29,14 @@ public class MovieController {
     public List<DrMovie> getMoviesByTitle(@RequestParam String title){
         return service.getMoviesByTitle(title);
     }
+
+    @GetMapping(value = "/getMoviesByGenre")
+    public List<DrMovie> getMoviesByGenre(@RequestParam String genre){
+        return service.getMoviesByGenre(genre);
+    }
+
+    @GetMapping(value = "/getMoviesByActor")
+    public List<DrMovie> getMoviesByActor(@RequestParam String actor){
+        return service.getMoviesByActor(actor);
+    }
 }
