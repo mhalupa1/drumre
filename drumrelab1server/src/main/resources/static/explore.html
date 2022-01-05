@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="js/explore.js"></script>
 	</head>
-	<body onLoad="getCookie()">
+	<body onLoad="getCookie(); getGenres()">
 		<div id="header">
 			<h1>Movies</h1>
 		</div>
@@ -23,6 +23,8 @@
 			<button onClick="rank()">Ranking</button>
 			<button onClick="genres()">Genres</button>
 			<button onClick="actors()">Actors</button>
+			<button onClick="directors()">Directors</button>
+			<button onClick="writers()">Writers</button>
 		</div>
 
 		<div id="recommended">
@@ -33,32 +35,29 @@
 		
 		</div>
 
-		<div id="byGenre">
-			<select name="genre" id="genre">
-				<option>adventure</option>
-				<option>science-fiction</option>
-				<option>action</option>
-				<option>comedy</option>
-				<option>superhero</option>
-				<option>fantasy</option>
-				<option>drama</option>
-				<option>mystery</option>
-				<option>animation</option>
-				<option>musical</option>
-				<option>family</option>
-				<option>crime</option>
-				<option>thriller</option>
-				<option>romance</option>
-			</select>
-			<button onClick="searchByGenre()"><i class="fa fa-search"></i></button>
+		<div id="byGenre" class="searchDivs">
+			<select name="genre" id="genre"></select>
+			<button id="genreBtn" onClick="search(this.id)"><i class="fa fa-search"></i></button>
 		</div>
 		<div id="genreResult" class="result"></div>
 
-		<div id="byActor">
-			<input id="actor" type="text" placeholder="Search by actor...">
-			<button id="actorBtn" onClick="searchByActor()"><i class="fa fa-search"></i></button>
+		<div id="byActor" class="searchDivs">
+			<input id="actor" type="text" placeholder="Search movies by actor...">
+			<button id="actorBtn" onClick="search(this.id)"><i class="fa fa-search"></i></button>
 		</div>
 		<div id="actorResult" class="result"></div>
+
+		<div id="byDirector" class="searchDivs">
+			<input id="director" type="text" placeholder="Search movies by director...">
+			<button id="directorBtn" onClick="search(this.id)"><i class="fa fa-search"></i></button>
+		</div>
+		<div id="directorResult" class="result"></div>
+		
+		<div id="byWriter" class="searchDivs">
+			<input id="writer" type="text" placeholder="Search movies by writer...">
+			<button id="writerBtn" onClick="search(this.id)"><i class="fa fa-search"></i></button>
+		</div>
+		<div id="writerResult" class="result"></div>
 
 		<div id="myModal" class="modal">
 			<div id="modal-content">
@@ -87,6 +86,22 @@
 			if (event.keyCode === 13) {
 				event.preventDefault();
 				document.getElementById("actorBtn").click();
+			}
+		});
+
+		var input = document.getElementById("director");
+		input.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("directorBtn").click();
+			}
+		});
+
+		var input = document.getElementById("writer");
+		input.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("writerBtn").click();
 			}
 		});
 	</script>

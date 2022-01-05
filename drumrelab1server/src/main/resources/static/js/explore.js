@@ -25,12 +25,20 @@ function recommend(){
 	$("#ranking").hide();
 	$("#byGenre").hide();
 	$("#byActor").hide();
+	$("#byDirector").hide();
+	$("#byWriter").hide();
 
 	$("#genreResult").hide();
 	$("#genreResult").empty();
 
 	$("#actorResult").hide();
 	$("#actorResult").empty();
+
+	$("#directorResult").hide();
+	$("#directorResult").empty();
+
+	$("#writerResult").hide();
+	$("#writerResult").empty();
 }
 
 function rank(){
@@ -38,12 +46,20 @@ function rank(){
 	$("#ranking").show();
 	$("#byGenre").hide();
 	$("#byActor").hide();
+	$("#byDirector").hide();
+	$("#byWriter").hide();
 
 	$("#genreResult").hide();
 	$("#genreResult").empty();
 
 	$("#actorResult").hide();
 	$("#actorResult").empty();
+
+	$("#directorResult").hide();
+	$("#directorResult").empty();
+
+	$("#writerResult").hide();
+	$("#writerResult").empty();
 }
 
 function genres(){
@@ -51,11 +67,19 @@ function genres(){
 	$("#ranking").hide();
 	$("#byGenre").show();
 	$("#byActor").hide();
+	$("#byDirector").hide();
+	$("#byWriter").hide();
 
 	$("#genreResult").show();
 
 	$("#actorResult").hide();
 	$("#actorResult").empty();
+
+	$("#directorResult").hide();
+	$("#directorResult").empty();
+
+	$("#writerResult").hide();
+	$("#writerResult").empty();
 }
 
 function actors(){
@@ -63,66 +87,120 @@ function actors(){
 	$("#ranking").hide();
 	$("#byGenre").hide();
 	$("#byActor").show();
+	$("#byDirector").hide();
+	$("#byWriter").hide();
 
 	$("#genreResult").hide();
 	$("#genreResult").empty();
 
 	$("#actorResult").show();
+
+	$("#directorResult").hide();
+	$("#directorResult").empty();
+
+	$("#writerResult").hide();
+	$("#writerResult").empty();
 }
 
-function searchByGenre(){
+function directors(){
+	$("#recommended").hide();
+	$("#ranking").hide();
+	$("#byGenre").hide();
+	$("#byActor").hide();
+	$("#byDirector").show();
+	$("#byWriter").hide();
 
+	$("#genreResult").hide();
 	$("#genreResult").empty();
-	var container = $("#genreResult");
 
-	var sendData = {
-		genre:$("#genre").val()
-	}
+	$("#actorResult").hide();
+	$("#actorResult").empty();
 
-	$.ajax({
-		type:'GET',
-		url:'/getMoviesByGenre',
-		contentType:'application/json',
-		data:sendData,
-		success:function(data){
-			$.each(data, function(i, r){
-				container.append(
-					'<div>' +
-						'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster + '"/>' +
-						'<button id="' + r.id + '" onClick="getMovie(this.id)">' + r.title + '</button>' +
-					'</div>'
-				);
-			});
-		}
-	});
+	$("#directorResult").show();
+
+	$("#writerResult").hide();
+	$("#writerResult").empty();
 }
 
-function searchByActor(){
+function writers(){
+	$("#recommended").hide();
+	$("#ranking").hide();
+	$("#byGenre").hide();
+	$("#byActor").hide();
+	$("#byDirector").hide();
+	$("#byWriter").show();
 
+	$("#genreResult").hide();
+	$("#genreResult").empty();
+
+	$("#actorResult").hide();
 	$("#actorResult").empty();
-	var container = $("#actorResult");
 
-	var sendData = {
-		actor:$("#actor").val()
+	$("#directorResult").hide();
+	$("#directorResult").empty();
+
+	$("#writerResult").show();
+}
+
+function search(id){
+
+	var container;
+	var sendData;
+	var url;
+
+	if(id == "genreBtn"){
+		$("#genreResult").empty();
+		container = $("#genreResult");
+		sendData = {
+			name:$("#genre").val()
+		}
+		url = "/getMoviesByGenre";
+	} else if(id == "actorBtn"){
+		$("#actorResult").empty();
+		container = $("#actorResult");
+		sendData = {
+			name:$("#actor").val()
+		}
+		url = "/getMoviesByActor";
+		$("#actor").val("");
+	} else if(id == "directorBtn"){
+		$("#directorResult").empty();
+		container = $("#directorResult");
+		sendData = {
+			name:$("#director").val()
+		}
+		url = "/getMoviesByDirector";
+		$("#director").val("");
+	} else if(id == "writerBtn"){
+		$("#writerResult").empty();
+		container = $("#writerResult");
+		sendData = {
+			name:$("#writer").val()
+		}
+		url = "/getMoviesByWriter";
+		$("#writer").val("");
 	}
 
 	$.ajax({
 		type:'GET',
-		url:'/getMoviesByActor',
+		url:url,
 		contentType:'application/json',
 		data:sendData,
 		success:function(data){
-			$.each(data, function(i, r){
-				container.append(
-					'<div>' +
-						'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster + '"/>' +
-						'<button id="' + r.id + '" onClick="getMovie(this.id)">' + r.title + '</button>' +
-					'</div>'
-				);
-			});
+			if(data != ""){
+				$.each(data, function(i, r){
+					container.append(
+						'<div>' +
+							'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster + '"/>' +
+							'<button id="' + r.id + '" onClick="getMovie(this.id)">' + r.title + '</button>' +
+						'</div>'
+					);
+				});
+			} else {
+				alert("Nothing found!");
+			}
 		}
 	});
-	$("#actor").val("");
 }
 
 function getMovie(id){
@@ -193,4 +271,21 @@ function getMovie(id){
 
 function closeModal(){
 	$("#myModal").css("display", "none");
+}
+
+function getGenres(){
+	var container = $("#genre");
+
+	$.ajax({
+		type:'GET',
+		url:'/getGenres',
+		contentType:'application/json',
+		success:function(data){
+			$.each(data, function(i, r){
+				container.append(
+					'<option>' + r.name + '</option>'
+				);
+			});
+		}
+	});
 }

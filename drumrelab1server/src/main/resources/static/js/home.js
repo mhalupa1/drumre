@@ -90,7 +90,6 @@ function closeModal(){
 }
 
 function searchMovie(){
-	$("#myModal").css("display", "block");
 
 	var sendData = {
 		title: $("#search").val()
@@ -107,57 +106,62 @@ function searchMovie(){
 		contentType:'application/json',
 		data:sendData,
 		success:function(data){
-			$.each(data, function(i, r){
-				$("#poster").attr("src", "https://image.tmdb.org/t/p/original" + r.poster);
-				var link = r.trailer;
-				link = link.replace("watch?v=", "embed/");
-				table.append(
-					'<tr>' +
-						'<th>Title</th>' +
-						'<td>' + r.title + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Release</th>' +
-						'<td>' + r.releaseDate + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Actors</th>' +
-						'<td>' + r.actors + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Directors</th>' +
-						'<td>' + r.directors + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Writers</th>' +
-						'<td>' + r.writers + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Genres</th>' +
-						'<td>' + r.genres + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Synopsis</th>' +
-						'<td>' + r.synopsis + '</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>imdb</th>' +
-						'<td>' + r.imdb + '/10</td>' +
-					'</tr>' +
-					'<tr>' +
-						'<th>Metascore</th>' +
-						'<td>' + r.metascore + '/100</td>' +
-					'</tr>'
-				);
-				$("#trailer").attr("src", link);
-				$("#imdb").attr("href", "https://www.imdb.com/title/" + r.imdbId);
-				$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + r.movieDbId);
-				$("#trakt").attr("href", "https://trakt.tv/movies/" + r.traktId);
-				$("#homepage").attr("href", r.homepage);
-				if(i == 0){
-					return false;
-				}
-			});
+			if(data != ""){
+				$("#myModal").css("display", "block");
+				$.each(data, function(i, r){
+					$("#poster").attr("src", "https://image.tmdb.org/t/p/original" + r.poster);
+					var link = r.trailer;
+					link = link.replace("watch?v=", "embed/");
+					table.append(
+						'<tr>' +
+							'<th>Title</th>' +
+							'<td>' + r.title + '</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>Release</th>' +
+							'<td>' + r.releaseDate + '</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>Actors</th>' +
+							'<td>' + r.actors + '</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>Directors</th>' +
+							'<td>' + r.directors + '</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>Writers</th>' +
+							'<td>' + r.writers + '</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>Genres</th>' +
+							'<td>' + r.genres + '</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>Synopsis</th>' +
+							'<td>' + r.synopsis + '</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>imdb</th>' +
+							'<td>' + r.imdb + '/10</td>' +
+						'</tr>' +
+						'<tr>' +
+							'<th>Metascore</th>' +
+							'<td>' + r.metascore + '/100</td>' +
+						'</tr>'
+					);
+					$("#trailer").attr("src", link);
+					$("#imdb").attr("href", "https://www.imdb.com/title/" + r.imdbId);
+					$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + r.movieDbId);
+					$("#trakt").attr("href", "https://trakt.tv/movies/" + r.traktId);
+					$("#homepage").attr("href", r.homepage);
+					if(i == 0){
+						return false;
+					}
+				});
+			} else {
+				alert("Nothing found!");
+			}
 		}
 	});
 }
