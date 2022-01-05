@@ -4,8 +4,8 @@ import com.uwetrottmann.trakt5.TraktV2;
 import com.uwetrottmann.trakt5.entities.Movie;
 import com.uwetrottmann.trakt5.enums.Extended;
 import com.uwetrottmann.trakt5.services.Movies;
-import hr.fer.drumre.dao.MovieRepository;
-import hr.fer.drumre.model.DrMovie;
+import hr.fer.drumre.dao.*;
+import hr.fer.drumre.model.*;
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbMovies;
 import info.movito.themoviedbapi.model.MovieDb;
@@ -29,6 +29,18 @@ public class APIGetter {
 
     @Autowired
     MovieRepository repository;
+
+    @Autowired
+    GenreRepository genreRepository;
+
+    @Autowired
+    ActorRepository actorRepository;
+
+    @Autowired
+    DirectorRepository directorRepository;
+
+    @Autowired
+    WriterRepository writerRepository;
     List<DrMovie> newMovies;
 
     /*@EventListener(ApplicationReadyEvent.class)
@@ -135,15 +147,88 @@ public class APIGetter {
         return Arrays.stream(list.split(",")).collect(Collectors.toList());
     }
 
+    /*private void getGenres(){
+        List<DrMovie> movies = repository.findAll();
+
+        Set<String> genreSet = new HashSet<>();
+        for(DrMovie movie : movies){
+            List<String> genres = movie.getGenres();
+            genreSet.addAll(genres);
+        }
+
+        int idCounter = 0;
+        List<DrGenre> genres = new LinkedList<>();
+        for(String genreName: genreSet){
+            genres.add(new DrGenre(++idCounter,genreName));
+        }
+
+        genreRepository.saveAll(genres);
 
 
-    private void getTrakt(){
+    }*/
 
-    }
+    /*@EventListener(ApplicationReadyEvent.class)
+    public void getActors(){
+        List<DrMovie> movies = repository.findAll();
 
-    private void getTmdb(){
+        Set<String> actorSet = new HashSet<>();
+        for(DrMovie movie : movies){
+            List<String> actors = movie.getActors();
+            if(actors != null) {
+                actorSet.addAll(actors);
+            }
+        }
 
-    }
+        int idCounter = 0;
+        List<DrActor> actors = new LinkedList<>();
+        for(String actorName: actorSet){
+            actors.add(new DrActor(++idCounter,actorName.trim()));
+        }
+
+        actorRepository.saveAll(actors);
+    }*/
+
+    /*@EventListener(ApplicationReadyEvent.class)
+    public void getDirectors(){
+        List<DrMovie> movies = repository.findAll();
+
+        Set<String> directorSet = new HashSet<>();
+        for(DrMovie movie : movies){
+            List<String> directors = movie.getDirectors();
+            if(directors != null) {
+                directorSet.addAll(directors);
+            }
+        }
+
+        int idCounter = 0;
+        List<DrDirector> directors = new LinkedList<>();
+        for(String directorName: directorSet){
+            directors.add(new DrDirector(++idCounter,directorName.trim()));
+        }
+
+        directorRepository.saveAll(directors);
+    }*/
+
+    /*@EventListener(ApplicationReadyEvent.class)
+    public void getWriters(){
+        List<DrMovie> movies = repository.findAll();
+
+        Set<String> writerSet = new HashSet<>();
+        for(DrMovie movie : movies){
+            List<String> writers = movie.getWriters();
+            if(writers != null) {
+                writerSet.addAll(writers);
+            }
+        }
+
+        int idCounter = 0;
+        List<DrWriter> writers = new LinkedList<>();
+        for(String writerName: writerSet){
+            writers.add(new DrWriter(++idCounter,writerName.trim()));
+        }
+
+        writerRepository.saveAll(writers);
+    }*/
 
 
 

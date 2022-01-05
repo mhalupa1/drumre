@@ -30,13 +30,24 @@ public class MovieController {
         return service.getMoviesByTitle(title);
     }
 
-    @GetMapping(value = "/getMoviesByGenre")
-    public List<DrMovie> getMoviesByGenre(@RequestParam String genre){
-        return service.getMoviesByGenre(genre);
+    @GetMapping(value = "/getMoviesByActor")
+    public List<DrMovie> getMoviesByActor(@RequestParam String name)
+    {
+        return service.getMoviesByActor(name);
     }
 
-    @GetMapping(value = "/getMoviesByActor")
-    public List<DrMovie> getMoviesByActor(@RequestParam String actor){
-        return service.getMoviesByActor(actor);
+    @GetMapping(value = "/getMoviesByDirector")
+    public List<DrMovie> getMoviesByDirector(@RequestParam String name){
+        return service.getMoviesByDirector(name);
+    }
+
+    @GetMapping(value = "/getMoviesByGenre")
+    public List<DrMovie> getMoviesByGenre(@RequestParam String name){
+        return service.getMoviesByGenre(name);
+    }
+
+    @GetMapping(value = "/getMoviesByWriter")
+    public List<DrMovie> getMoviesByWriter(@RequestParam String name){
+        return service.getMoviesByWriter(name);
     }
 }

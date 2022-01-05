@@ -19,4 +19,9 @@ public interface MovieRepository extends MongoRepository<DrMovie,Integer> {
 
 	@Query(value = "{'actors': {'$regex' : '?0', '$options': 'i'}}")
 	public List<DrMovie> getMoviesByActor(String actor);
+    @Query(value = "{'directors': {'$regex' : '?0', '$options':'i'}}")
+    public List<DrMovie> getMoviesByDirector(String name);
+
+    @Query(value = "{'writers': {'$regex' : '?0', '$options':'i'}}")
+    public List<DrMovie> getMoviesByWriter(String name);
 }
