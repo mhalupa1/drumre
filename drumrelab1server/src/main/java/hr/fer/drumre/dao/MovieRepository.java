@@ -24,4 +24,12 @@ public interface MovieRepository extends MongoRepository<DrMovie,Integer> {
 
     @Query(value = "{'writers': {'$regex' : '?0', '$options':'i'}}")
     public List<DrMovie> getMoviesByWriter(String name);
+    
+    @Query(value = "{'genres': {'$regex': '?0', '$options': 'i'}, 'imdb': {'$ne': 'N/A'}}",
+    		sort = "{'imdb': -1, 'metascore': -1}")
+    public List<DrMovie> getMoviesByGenreImdbRanked(String genre);
+
+    @Query(value = "{'genres': {'$regex': '?0', '$options': 'i'}, 'metascore': {'$ne': 'N/A'}}",
+    		sort = "{'metascore': -1, 'imdb': -1}")
+    public List<DrMovie> getMoviesByGenreMetascoreRanked(String genre);
 }

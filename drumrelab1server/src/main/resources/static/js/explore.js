@@ -28,6 +28,9 @@ function recommend(){
 	$("#byDirector").hide();
 	$("#byWriter").hide();
 
+	$("#rankResult").hide();
+	$("#rankResult").empty();
+
 	$("#genreResult").hide();
 	$("#genreResult").empty();
 
@@ -48,6 +51,8 @@ function rank(){
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").hide();
+
+	$("#rankResult").show();
 
 	$("#genreResult").hide();
 	$("#genreResult").empty();
@@ -70,6 +75,9 @@ function genres(){
 	$("#byDirector").hide();
 	$("#byWriter").hide();
 
+	$("#rankResult").hide();
+	$("#rankResult").empty();
+
 	$("#genreResult").show();
 
 	$("#actorResult").hide();
@@ -89,6 +97,9 @@ function actors(){
 	$("#byActor").show();
 	$("#byDirector").hide();
 	$("#byWriter").hide();
+
+	$("#rankResult").hide();
+	$("#rankResult").empty();
 
 	$("#genreResult").hide();
 	$("#genreResult").empty();
@@ -110,6 +121,9 @@ function directors(){
 	$("#byDirector").show();
 	$("#byWriter").hide();
 
+	$("#rankResult").hide();
+	$("#rankResult").empty();
+
 	$("#genreResult").hide();
 	$("#genreResult").empty();
 
@@ -129,6 +143,9 @@ function writers(){
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").show();
+
+	$("#rankResult").hide();
+	$("#rankResult").empty();
 
 	$("#genreResult").hide();
 	$("#genreResult").empty();
@@ -197,7 +214,7 @@ function search(id){
 					);
 				});
 			} else {
-				alert("Nothing found!");
+				container.append('<p>Nothing found!</p>');
 			}
 		}
 	});
@@ -275,6 +292,7 @@ function closeModal(){
 
 function getGenres(){
 	var container = $("#genre");
+	var container2 = $("#genreRank");
 
 	$.ajax({
 		type:'GET',
@@ -285,7 +303,47 @@ function getGenres(){
 				container.append(
 					'<option>' + r.name + '</option>'
 				);
+				container2.append(
+					'<option>' + r.name + '</option>'
+				);
 			});
+		}
+	});
+}
+
+function getRanking(){
+	$("#rankResult").empty();
+	var container = $("#rankResult");
+	var sendData = {
+		genre:$("#genreRank").val()
+	};
+	var url;
+	if($("#rank").val() == 'imdb'){
+		url = '/getMoviesByGenreImdbRanked';
+	} else if($("#rank").val() == 'metascore'){
+		url = '/getMoviesByGenreMetascoreRanked';
+	}
+
+	$.ajax({
+		type:'GET',
+		url:url,
+		contentType:'application/json',
+		data:sendData,
+		success:function(data){
+			console.log(data);
+			if(data != ""){
+				$.each(data, function(i, r){
+					container.append(
+						'<div>' +
+							'<h1>' + (i+1) + '.</h1>' +
+							'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster + '"/>' +
+							'<button id="' + r.id + '" onClick="getMovie(this.id)">' + r.title + '</button>' +
+						'</div>'
+					);
+				});
+			} else {
+				container.append('<p>Nothing found!</p>');
+			}
 		}
 	});
 }

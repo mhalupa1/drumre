@@ -17,7 +17,7 @@ body{
 }
 
 #navbar{
-	font-family: Arial, Helvetica, sans-serif;
+	font-family:Arial, Helvetica, sans-serif;
 	border-top:2px solid #3b3b3b;
 	border-bottom:2px solid #3b3b3b;
 	width:100%;
@@ -127,6 +127,7 @@ body{
 	align-items:center;
 	justify-content:center;
 	overflow:auto;
+	font-family:Arial, Helvetica, sans-serif;
 }
 
 .result div {
@@ -215,7 +216,7 @@ body{
 }
 
 #table {
-	border:1px solid black;
+	border-collapse:collapse;
 	margin:10px;
 	font-size:15px;
 }
@@ -318,4 +319,47 @@ body{
 
 #homepage:hover {
 	background-color:#008400;
+}
+
+#rankResult {
+	margin:10px 10px 0px;
+	padding:10px;
+	display:grid;
+	grid-template-columns:auto auto auto auto auto;
+	align-items:center;
+	justify-content:center;
+	overflow:auto;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#rankResult div {
+	width:252px;
+	height:500px;
+	padding-bottom:10px;
+	margin-bottom:10px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	border:1px solid #c7c7c7;
+	text-align:center;
+	background-color:black;
+}
+
+#rankResult h1 {
+	color:#e2c107;
+}
+
+#rankResult button {
+	padding:10px 10px 7px;
+	border:none;
+	color:#e2c107;
+	background-color:black;
+	font-weight:bold;
+	font-size:14px;
+	width:252px;
+	margin-top:10px;
+}
+
+#rankResult button:hover {
+	color:yellow;
+	background-color:#1b1b1b;
 }

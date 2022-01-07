@@ -20,7 +20,7 @@
 		</div>
 		<div id="navigation">
 			<button onClick="recommend()">Recommended</button>
-			<button onClick="rank()">Ranking</button>
+			<button onClick="rank()">Top 10</button>
 			<button onClick="genres()">Genres</button>
 			<button onClick="actors()">Actors</button>
 			<button onClick="directors()">Directors</button>
@@ -31,9 +31,15 @@
 		
 		</div>
 
-		<div id="ranking">
-		
+		<div id="ranking" class="searchDivs">
+			<select name="rank" id="rank">
+				<option>imdb</option>
+				<option>metascore</option>
+			</select>
+			<select name="genreRank" id="genreRank"></select>
+			<button id="rankBtn" onClick="getRanking()"><i class="fa fa-search"></i></button>
 		</div>
+		<div id="rankResult"></div>
 
 		<div id="byGenre" class="searchDivs">
 			<select name="genre" id="genre"></select>

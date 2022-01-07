@@ -44,4 +44,21 @@ public class MovieService {
         return repo.getMoviesByGenre(name);
     }
 
+    public List<DrMovie> getMoviesByGenreImdbRanked(String genre){
+    	List<DrMovie> list = repo.getMoviesByGenreImdbRanked(genre);
+    	if(list.size() < 10) {
+    		return list.subList(0, list.size());
+    	} else {
+    		return list.subList(0, 10);
+    	}
+    }
+
+    public List<DrMovie> getMoviesByGenreMetascoreRanked(String genre){
+    	List<DrMovie> list = repo.getMoviesByGenreMetascoreRanked(genre);
+    	if(list.size() < 10) {
+    		return list.subList(0, list.size());
+    	} else {
+    		return list.subList(0, 10);
+    	}
+    }
 }

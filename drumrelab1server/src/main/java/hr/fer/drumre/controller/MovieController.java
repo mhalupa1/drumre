@@ -31,8 +31,7 @@ public class MovieController {
     }
 
     @GetMapping(value = "/getMoviesByActor")
-    public List<DrMovie> getMoviesByActor(@RequestParam String name)
-    {
+    public List<DrMovie> getMoviesByActor(@RequestParam String name){
         return service.getMoviesByActor(name);
     }
 
@@ -49,5 +48,15 @@ public class MovieController {
     @GetMapping(value = "/getMoviesByWriter")
     public List<DrMovie> getMoviesByWriter(@RequestParam String name){
         return service.getMoviesByWriter(name);
+    }
+
+    @GetMapping(value = "/getMoviesByGenreImdbRanked")
+    public List<DrMovie> getMoviesByGenreImdbRanked(@RequestParam String genre){
+    	return service.getMoviesByGenreImdbRanked(genre);
+    }
+
+    @GetMapping(value = "/getMoviesByGenreMetascoreRanked")
+    public List<DrMovie> getMoviesByGenreMetascoreRanked(@RequestParam String genre){
+    	return service.getMoviesByGenreMetascoreRanked(genre);
     }
 }
