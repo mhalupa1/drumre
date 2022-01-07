@@ -158,6 +158,10 @@ body{
 	background-color:#1b1b1b;
 }
 
+.result p {
+	color:#e2c107;
+}
+
 .posters {
 	width:250px;
 	height:350px;

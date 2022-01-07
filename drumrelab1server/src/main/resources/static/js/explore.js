@@ -22,6 +22,34 @@ function logout(){
 
 function recommend(){
 	$("#recommended").show();
+	$("#trending").hide();
+	$("#ranking").hide();
+	$("#byGenre").hide();
+	$("#byActor").hide();
+	$("#byDirector").hide();
+	$("#byWriter").hide();
+
+	$("#trending").empty();
+
+	$("#rankResult").hide();
+	$("#rankResult").empty();
+
+	$("#genreResult").hide();
+	$("#genreResult").empty();
+
+	$("#actorResult").hide();
+	$("#actorResult").empty();
+
+	$("#directorResult").hide();
+	$("#directorResult").empty();
+
+	$("#writerResult").hide();
+	$("#writerResult").empty();
+}
+
+function trending(){
+	$("#recommended").hide();
+	$("#trending").show();
 	$("#ranking").hide();
 	$("#byGenre").hide();
 	$("#byActor").hide();
@@ -42,15 +70,20 @@ function recommend(){
 
 	$("#writerResult").hide();
 	$("#writerResult").empty();
+
+	getTrending();
 }
 
 function rank(){
 	$("#recommended").hide();
+	$("#trending").hide();
 	$("#ranking").show();
 	$("#byGenre").hide();
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").hide();
+
+	$("#trending").empty();
 
 	$("#rankResult").show();
 
@@ -69,11 +102,14 @@ function rank(){
 
 function genres(){
 	$("#recommended").hide();
+	$("#trending").hide();
 	$("#ranking").hide();
 	$("#byGenre").show();
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").hide();
+
+	$("#trending").empty();
 
 	$("#rankResult").hide();
 	$("#rankResult").empty();
@@ -92,11 +128,14 @@ function genres(){
 
 function actors(){
 	$("#recommended").hide();
+	$("#trending").hide();
 	$("#ranking").hide();
 	$("#byGenre").hide();
 	$("#byActor").show();
 	$("#byDirector").hide();
 	$("#byWriter").hide();
+
+	$("#trending").empty();
 
 	$("#rankResult").hide();
 	$("#rankResult").empty();
@@ -115,11 +154,14 @@ function actors(){
 
 function directors(){
 	$("#recommended").hide();
+	$("#trending").hide();
 	$("#ranking").hide();
 	$("#byGenre").hide();
 	$("#byActor").hide();
 	$("#byDirector").show();
 	$("#byWriter").hide();
+
+	$("#trending").empty();
 
 	$("#rankResult").hide();
 	$("#rankResult").empty();
@@ -138,11 +180,14 @@ function directors(){
 
 function writers(){
 	$("#recommended").hide();
+	$("#trending").hide();
 	$("#ranking").hide();
 	$("#byGenre").hide();
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").show();
+
+	$("#trending").empty();
 
 	$("#rankResult").hide();
 	$("#rankResult").empty();
@@ -344,6 +389,33 @@ function getRanking(){
 			} else {
 				container.append('<p>Nothing found!</p>');
 			}
+		}
+	});
+}
+
+function getTrending(){
+	$("#trending").empty();
+	var container = $("#trending");
+
+	$.ajax({
+		type:'GET',
+		url:'https://api.themoviedb.org/3/trending/all/week?api_key=ceb862e981581c4562d9983396e38ef6',
+		contentType:'application/json',
+		success:function(data){
+			$.each(data.results, function(i, r){
+				var title;
+				if(r.title != undefined){
+					title = r.title;
+				} else {
+					title = r.name;
+				}
+				container.append(
+					'<div>' +
+						'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster_path + '"/>' +
+						'<p>' + title + '</p>' +
+					'</div>'
+				);
+			});
 		}
 	});
 }
