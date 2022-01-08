@@ -45,6 +45,8 @@ function recommend(){
 
 	$("#writerResult").hide();
 	$("#writerResult").empty();
+
+	getRecommended();
 }
 
 function trending(){
@@ -55,6 +57,8 @@ function trending(){
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").hide();
+
+	$("#recommended").empty();
 
 	$("#rankResult").hide();
 	$("#rankResult").empty();
@@ -83,6 +87,8 @@ function rank(){
 	$("#byDirector").hide();
 	$("#byWriter").hide();
 
+	$("#recommended").empty();
+
 	$("#trending").empty();
 
 	$("#rankResult").show();
@@ -108,6 +114,8 @@ function genres(){
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").hide();
+
+	$("#recommended").empty();
 
 	$("#trending").empty();
 
@@ -135,6 +143,8 @@ function actors(){
 	$("#byDirector").hide();
 	$("#byWriter").hide();
 
+	$("#recommended").empty();
+
 	$("#trending").empty();
 
 	$("#rankResult").hide();
@@ -161,6 +171,8 @@ function directors(){
 	$("#byDirector").show();
 	$("#byWriter").hide();
 
+	$("#recommended").empty();
+
 	$("#trending").empty();
 
 	$("#rankResult").hide();
@@ -186,6 +198,8 @@ function writers(){
 	$("#byActor").hide();
 	$("#byDirector").hide();
 	$("#byWriter").show();
+
+	$("#recommended").empty();
 
 	$("#trending").empty();
 
@@ -275,6 +289,10 @@ function getMovie(id){
 	$("#table").empty();
 	var table = $("#table");
 
+	var userId = getUserId();
+	var movieName;
+	var genreName;
+
 	$.ajax({
 		type:'GET',
 		url:'/getMovieById',
@@ -327,8 +345,33 @@ function getMovie(id){
 			$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + data.movieDbId);
 			$("#trakt").attr("href", "https://trakt.tv/movies/" + data.traktId);
 			$("#homepage").attr("href", data.homepage);
+
+			movieName = data.title;
+			genreName = data.genres;
 		}
 	});
+	setTimeout(() => {
+		for(let i = 0; i < genreName.length; i++){
+			var sData = {
+				userId:userId,
+				movieId:id,
+				movieName:movieName,
+				genreName:genreName[i]
+			}
+			console.log(sData);
+			$.ajax({
+				type:'POST',
+				url:'/addClick?userId=' + userId + '&movieId=' + id + '&movieName=' + movieName.replaceAll(" ", "-") + '&genreName=' + genreName[i],
+				contentType:'application/json',
+				success:function(){
+					console.log("s")
+				},
+				error:function(){
+					console.log("e")
+				}
+			});
+		}
+	}, 1000);
 }
 
 function closeModal(){
@@ -418,4 +461,48 @@ function getTrending(){
 			});
 		}
 	});
+}
+
+function getRecommended(){
+	$("#recommended").empty();
+	var container = $("#recommended");
+
+	var id = getUserId();
+
+	sendData = {
+		id:id
+	}
+
+	$.ajax({
+		type:'GET',
+		url:'/personalize',
+		contentType:'application/json',
+		data:sendData,
+		success:function(data){
+			console.log(data);
+			console.log("s");
+			$.each(data.results, function(i, r){
+				container.append(
+					'<div>' +
+						'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster + '"/>' +
+						'<button id="' + r.id + '" onClick="getMovie(this.id)">' + r.title + '</button>' +
+					'</div>'
+				);
+			});
+		}
+	});
+}
+
+function getUserId() {
+	let name = "userId=";
+	let ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
 }

@@ -17,7 +17,7 @@ import java.util.*;
 @Service
 public class RecommendationService {
 
-    public List<Object> personalize(int id) throws IOException, ParseException{
+    public List<Object> personalize(Long id) throws IOException, ParseException{
         URL url = new URL("http://localhost:8081/personalize?id=" + id);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -37,7 +37,7 @@ public class RecommendationService {
         return data;
     }
 
-    public void addClick(int userId, int movieId, String movieName, String genreName) throws IOException, ParseException {
+    public void addClick(Long userId, int movieId, String movieName, String genreName) throws IOException, ParseException {
         URL url = new URL("http://localhost:8081/addClick?userId=" + userId + "&movieId=" + movieId + "&movieName=" + movieName +"&genreName=" + genreName);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

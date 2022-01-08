@@ -21,12 +21,12 @@ public class RecommendationController {
     RecommendationService service;
 
     @GetMapping(value ="/personalize")
-    public List<Object> personalize(@RequestParam int id) throws IOException, ParseException, NoSuchFieldException, IllegalAccessException {
+    public List<Object> personalize(@RequestParam Long id) throws IOException, ParseException, NoSuchFieldException, IllegalAccessException {
         return service.personalize(id);
     }
 
     @PostMapping(value = "/addClick")
-    public ResponseEntity<String> addClick(@RequestParam int userId, @RequestParam int movieId,
+    public ResponseEntity<String> addClick(@RequestParam Long userId, @RequestParam int movieId,
                                            @RequestParam String movieName, @RequestParam String genreName) throws IOException, ParseException {
         service.addClick(userId,movieId,movieName,genreName);
         return new ResponseEntity<>(HttpStatus.OK);

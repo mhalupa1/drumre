@@ -17,11 +17,11 @@ public class RecommendationService {
     @Autowired
     RecommendationRepo repo;
 
-    public List<GenreReturnData> personalize(int id){
+    public List<GenreReturnData> personalize(Long id){
         return repo.personalize(id);
     }
 
-    public void addClick(int userId, int movieId,  String movieName,  String genreName){
+    public void addClick(Long userId, int movieId,  String movieName,  String genreName){
         repo.addClick(userId,movieId,movieName,genreName);
     }
 }

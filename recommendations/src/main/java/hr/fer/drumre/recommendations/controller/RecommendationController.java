@@ -21,13 +21,13 @@ public class RecommendationController {
     RecommendationService service;
 
     @GetMapping(value="/personalize")
-    public List<GenreReturnData> personalize(int id){
+    public List<GenreReturnData> personalize(Long id){
         return service.personalize(id);
     }
 
     @GetMapping(value ="/addClick")
-    public ResponseEntity<String> addClick(@RequestParam int userId, @RequestParam int movieId, @RequestParam String movieName, @RequestParam String genreName){
-        service.addClick(userId,movieId,movieName,genreName);
+    public ResponseEntity<String> addClick(@RequestParam Long userId, @RequestParam int movieId, @RequestParam String movieName, @RequestParam String genreName){
+        service.addClick(userId,movieId,movieName.replaceAll("-", " "),genreName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
