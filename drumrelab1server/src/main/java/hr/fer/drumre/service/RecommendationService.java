@@ -43,14 +43,7 @@ public class RecommendationService {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();
+        url.openStream();
 
-        String inline = "";
-        Scanner scanner = new Scanner(url.openStream());
-
-        while (scanner.hasNext()) {
-            inline += scanner.nextLine();
-        }
-        scanner.close();
-        JSONParser parse = new JSONParser(inline);
     }
 }
