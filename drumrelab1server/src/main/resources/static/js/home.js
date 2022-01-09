@@ -29,6 +29,10 @@ function getMovie(id){
 	$("#table").empty();
 	var table = $("#table");
 
+	var userId = getUserId();
+	var movieName;
+	var genreName;
+
 	$.ajax({
 		type:'GET',
 		url:'/getMovieById',
@@ -81,8 +85,24 @@ function getMovie(id){
 			$("#moviedb").attr("href", "https://www.themoviedb.org/movie/" + data.movieDbId);
 			$("#trakt").attr("href", "https://trakt.tv/movies/" + data.traktId);
 			$("#homepage").attr("href", data.homepage);
+
+			movieName = data.title;
+			genreName = data.genres;
 		}
 	});
+	setTimeout(() => {
+		for(let i = 0; i < genreName.length; i++){
+			$.ajax({
+				type:'POST',
+				url:'/addClick?userId=' + userId + '&movieId=' + id + '&movieName=' + movieName.replaceAll(" ", "-") + '&genreName=' + genreName[i],
+				contentType:'application/json',
+				success:function(){
+				},
+				error:function(){
+				}
+			});
+		}
+	}, 1000);
 }
 
 function closeModal(){
@@ -186,4 +206,18 @@ function logout(){
 	document.cookie = "tokenSecret=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 	document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 	window.location='http://localhost:8080/';
+}
+
+function getUserId() {
+	let name = "userId=";
+	let ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
 }

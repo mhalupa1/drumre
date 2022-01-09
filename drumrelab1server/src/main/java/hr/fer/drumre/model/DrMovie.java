@@ -210,4 +210,14 @@ public class DrMovie {
     public void setMovieDbId(String movieDbId) {
         this.movieDbId = movieDbId;
     }
+
+	@Override
+	public String toString() {
+		return "DrMovie [id=" + id + ", traktId=" + traktId + ", imdbId=" + imdbId + ", movieDbId=" + movieDbId
+				+ ", title=" + title + ", releaseDate=" + releaseDate + ", tagline=" + tagline + ", homepage="
+				+ homepage + ", synopsis=" + synopsis + ", trailer=" + trailer + ", genres=" + genres + ", poster="
+				+ poster + ", directors=" + directors + ", writers=" + writers + ", actors=" + actors + ", metascore="
+				+ metascore + ", imdb=" + imdb + ", rotten=" + rotten + ", metacritic=" + metacritic + ", rating="
+				+ rating + ", voteCount=" + voteCount + "]";
+	}
 }

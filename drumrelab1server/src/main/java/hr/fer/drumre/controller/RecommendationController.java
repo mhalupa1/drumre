@@ -1,5 +1,6 @@
 package hr.fer.drumre.controller;
 
+import hr.fer.drumre.model.DrMovie;
 import hr.fer.drumre.model.util.GenreRecommendations;
 import hr.fer.drumre.service.RecommendationService;
 import org.apache.tomcat.util.json.ParseException;
@@ -21,7 +22,7 @@ public class RecommendationController {
     RecommendationService service;
 
     @GetMapping(value ="/personalize")
-    public List<Object> personalize(@RequestParam Long id) throws IOException, ParseException, NoSuchFieldException, IllegalAccessException {
+    public List<DrMovie> personalize(@RequestParam Long id) throws IOException, ParseException, NoSuchFieldException, IllegalAccessException {
         return service.personalize(id);
     }
 

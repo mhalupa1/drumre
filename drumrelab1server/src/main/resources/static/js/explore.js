@@ -352,22 +352,13 @@ function getMovie(id){
 	});
 	setTimeout(() => {
 		for(let i = 0; i < genreName.length; i++){
-			var sData = {
-				userId:userId,
-				movieId:id,
-				movieName:movieName,
-				genreName:genreName[i]
-			}
-			console.log(sData);
 			$.ajax({
 				type:'POST',
 				url:'/addClick?userId=' + userId + '&movieId=' + id + '&movieName=' + movieName.replaceAll(" ", "-") + '&genreName=' + genreName[i],
 				contentType:'application/json',
 				success:function(){
-					console.log("s")
 				},
 				error:function(){
-					console.log("e")
 				}
 			});
 		}
@@ -418,7 +409,6 @@ function getRanking(){
 		contentType:'application/json',
 		data:sendData,
 		success:function(data){
-			console.log(data);
 			if(data != ""){
 				$.each(data, function(i, r){
 					container.append(
@@ -479,9 +469,7 @@ function getRecommended(){
 		contentType:'application/json',
 		data:sendData,
 		success:function(data){
-			console.log(data);
-			console.log("s");
-			$.each(data.results, function(i, r){
+			$.each(data, function(i, r){
 				container.append(
 					'<div>' +
 						'<img class="posters" src="https://image.tmdb.org/t/p/original' + r.poster + '"/>' +
